@@ -94,3 +94,32 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count(self):
         """Test that count objects from a database"""
+
+        
+        
+class TestDBStorage(unittest.TestCase):
+    """Test for DB storage"""
+    
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'test',
+                     'not testing db storge')
+    def test_get(self):
+        storage = models.storage
+        user = User(first_name='Adam', password='Adamless123!', email='adam@adam123')
+        user.save()
+        retrieved_user = storage.get(User, user.id)
+        self.assertTrue(retrieved_user is user)
+    
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'test',
+                     'not testing db storage')
+    def test_count(self):
+        """add new object to db"""
+        startCount = models.storage.count()
+        entire_count = models.storage.count()
+        state_count = models.storage.count("State")
+        self.assertEqual(models.storage.count("Blah"), 0)
+        newState = State(name="Montevideo")
+        newState.save()
+        newUser = User(email="ralexrivero@gmail.com.com", password="dummypass")
+        newUser.save()
+        self.assertEqual(models.storage.count("State"), state_count + 1)
+        self.assertEqual(models.storage.count(), startCount + 2)

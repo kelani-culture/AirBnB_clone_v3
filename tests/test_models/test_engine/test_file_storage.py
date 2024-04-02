@@ -114,9 +114,29 @@ class TestFileStorage(unittest.TestCase):
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
 
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_get(self):
-        """test that the get objects actually get the actual values needed"""
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'file',
+                     "not testing db storage")
+    def test_count(self, cls=None):
+        """Test that the count method
+        returns the correct number of models """
         storage = FileStorage()
-        objects = storage.__objects
-        
+        if cls not in set(classes.values()):
+            return
+        init_count = storage.count(cls)
+        newUser = User(first_name="new user 1",
+                    password="new_user_pwd", email="new_user")
+        newUser.save()
+        later_count = storage.count(cls)
+        self.assertTrue(later_count > init_count)
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'file',
+                     "not testing db storage")
+    def test_get(self):
+        """Tests that the user we retrieved using
+            get() method matches the one we created"""
+        storage = FileStorage()
+        obj = BaseModel()
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        storage.new(obj)
+        self.assertEqual(storage.get(BaseModel, obj.id), obj)
+        self.assertIsNone(storage.get(BaseModel, "nonexistent_id"))
