@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""blueprint for the places"""
+"""
+perform CRUD operation on the places endpoints
+of the airbnb application
+"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
