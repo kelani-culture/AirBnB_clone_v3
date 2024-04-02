@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Blueprint for the flask application endpoints"""
 from flask import Blueprint
 
 
