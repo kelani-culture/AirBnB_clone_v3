@@ -20,7 +20,7 @@ def close_storage(exc):
 def not_found(error):
     """return a 404 not found error for
        incorrect endpoints""" 
-    return jsonify({"error": "Not found"}) 
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == '__main__':
