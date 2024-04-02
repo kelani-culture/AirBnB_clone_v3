@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """Wrapper of AirBnB web app built using Flask"""
-
 import os
 from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ def not_found(error):
        incorrect endpoints""" 
     return jsonify({"error": "Not found"}), 404
 
+cors = CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 
 if __name__ == '__main__':
     host =  os.getenv('HBNB_API_HOST', '0.0.0.0')
