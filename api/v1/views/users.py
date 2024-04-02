@@ -8,6 +8,7 @@ from flask import jsonify, abort, request, make_response
 from markupsafe import escape
 from models.user import User
 from models import storage
+from passlib.hash import md5_crypt
 
 
 @app_views.route('/users/<user_id>', strict_slashes=False, methods=["GET"])
@@ -51,6 +52,7 @@ def post_user():
             return make_response(jsonify("Missing email"), 400)
         if 'password' not in body.keys():
             return make_response(jsonify("Missing password"), 400)
+        body['password'] = md5_crypt.hash(body['password'])
         new_user = User(**body)
         storage.new(new_user)
         storage.save()
