@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""CRUD operation on users object"""
+"""Perform Crud operations on users"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
