@@ -48,7 +48,7 @@ def delete_state(state_id):
     abort(404)
 
     
-@app_views.route('/states', methods=['POST'])
+@app_views.route('/states/', methods=['POST'])
 def create_state():
     """
     perform a post request on the state object
