@@ -1,11 +1,11 @@
 #!/usr/bin/python3
+"""
+setup flask application to be used
+"""
 import os
 from flask import Flask
 from models import storage
 from api.v1.views import app_views
-"""
-setup flask application
-"""
 
 
 app = Flask(__name__)
