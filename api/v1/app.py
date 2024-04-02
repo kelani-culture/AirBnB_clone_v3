@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""setup flask application for the airbnb project"""
+"""Wrapper of AirBnB web app built using Flask"""
 
 import os
 from flask import Flask
