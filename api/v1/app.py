@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-"""
-setup flask application to be used
-"""
+"""setup flask application for the airbnb project"""
+
 import os
 from flask import Flask
 from models import storage

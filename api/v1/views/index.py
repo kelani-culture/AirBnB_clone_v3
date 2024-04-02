@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-"""
-flask route to status endpoint
-"""
+"""flask route to status endpoint"""
+
 from api.v1.views import app_views
 from flask import jsonify
 
